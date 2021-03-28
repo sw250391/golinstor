@@ -27,12 +27,14 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
 	"strings"
+	"time"
 
-	"github.com/donovanhide/eventsource"
+	"github.com/sw250391/eventsource"
 	"github.com/moul/http2curl"
 	"golang.org/x/time/rate"
 )
@@ -167,7 +169,15 @@ func buildHttpClient() (*http.Client, error) {
 
 	if !cert && !key && !ca {
 		// Non of the special variables was set -> if TLS is used, default configuration can be used
-		return http.DefaultClient, nil
+                return &http.Client{
+                    Transport: &http.Transport{
+                        Dial: (&net.Dialer{
+                            Timeout:   30 * time.Second,
+                            KeepAlive: 30 * time.Second,
+                        }).Dial,
+                        IdleConnTimeout: 30 * time.Second,
+                    },
+                }, nil
 	}
 
 	tlsConfig := &tls.Config{}

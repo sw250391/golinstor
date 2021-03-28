@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/donovanhide/eventsource"
+	"github.com/sw250391/eventsource"
 )
 
 type EventMayPromoteChange struct {
