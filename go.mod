@@ -1,4 +1,4 @@
-module github.com/LINBIT/golinstor
+module github.com/sw250391/golinstor
 
 go 1.12
 
