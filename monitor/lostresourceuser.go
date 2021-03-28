@@ -168,16 +168,6 @@ func (lr *LostResourceUser) watch(resName string, dur time.Duration) {
 }
 
 func (ha *LostResourceUser) resHasQuorum(resName string) (bool, error) {
-	rd, err := ha.client.ResourceDefinitions.Get(ha.ctx, resName)
-	if err != nil {
-		return false, err
-	}
-
-	val, ok := rd.Props["DrbdOptions/Resource/quorum"]
-	if !ok || val == "off" {
-		return false, nil
-	}
-
 	return true, nil
 }
 
