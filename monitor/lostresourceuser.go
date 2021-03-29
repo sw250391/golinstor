@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/LINBIT/golinstor/client"
+	"github.com/sw250391/golinstor/client"
 )
 
 type resourceState struct {
